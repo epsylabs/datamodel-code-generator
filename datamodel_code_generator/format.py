@@ -68,6 +68,10 @@ class PythonVersion(Enum):
     @property
     def has_typed_dict_non_required(self) -> bool:
         return self._is_py_311_or_later
+    
+    @property
+    def has_type_aliasing(self) -> bool:
+        return self._is_py_310_or_later
 
 
 if TYPE_CHECKING:

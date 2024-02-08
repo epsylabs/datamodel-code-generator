@@ -291,6 +291,7 @@ class GraphQLParser(Parser):
                 custom_template_dir=self.custom_template_dir,
                 extra_template_data=self.extra_template_data,
                 description=scalar_graphql_object.description,
+                python_version=self.target_python_version,
             )
         )
 

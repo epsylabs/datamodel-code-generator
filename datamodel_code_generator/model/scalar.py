@@ -4,10 +4,11 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, ClassVar, DefaultDict, Dict, List, Optional, Tuple
 
-from datamodel_code_generator.imports import IMPORT_TYPE_ALIAS, Import
+from datamodel_code_generator.imports import IMPORT_TYPE_ALIAS, Import, IMPORT_TYPE_ALIAS_BACKPORT
 from datamodel_code_generator.model import DataModel, DataModelFieldBase
 from datamodel_code_generator.model.base import UNDEFINED
 from datamodel_code_generator.reference import Reference
+from datamodel_code_generator import PythonVersion
 
 _INT: str = 'int'
 _FLOAT: str = 'float'
@@ -46,6 +47,7 @@ class DataTypeScalar(DataModel):
         description: Optional[str] = None,
         default: Any = UNDEFINED,
         nullable: bool = False,
+        python_version: PythonVersion = PythonVersion.PY_37
     ):
         extra_template_data = extra_template_data or defaultdict(dict)
 
@@ -61,6 +63,11 @@ class DataTypeScalar(DataModel):
             ),
         )
         extra_template_data[scalar_name]['py_type'] = py_type
+
+        if python_version.has_type_aliasing:
+            self.DEFAULT_IMPORTS = (IMPORT_TYPE_ALIAS,)
+        else:
+            self.DEFAULT_IMPORTS = (IMPORT_TYPE_ALIAS_BACKPORT,)
 
         super().__init__(
             reference=reference,
