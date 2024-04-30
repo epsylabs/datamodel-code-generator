@@ -273,9 +273,9 @@ class DataType(_BaseModel):
     is_set: bool = False
     is_custom_type: bool = False
     literals: List[Union[StrictBool, StrictInt, StrictStr]] = []
-    use_standard_collections: bool = False
+    use_standard_collections: bool = True
     use_generic_container: bool = False
-    use_union_operator: bool = False
+    use_union_operator: bool = True
     alias: Optional[str] = None
     parent: Optional[Any] = None
     children: List[Any] = []
