@@ -51,7 +51,7 @@ except ImportError:  # pragma: no cover
     )
 
 
-graphql_resolver = graphql.type.introspection.TypeResolvers()
+graphql_resolver = graphql.type.introspection.TypeResolvers
 
 
 def build_graphql_schema(schema_str: str) -> graphql.GraphQLSchema:
